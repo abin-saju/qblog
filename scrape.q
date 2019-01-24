@@ -23,7 +23,12 @@ pyscript:.p.import[`hotelscrape];
 .scrape.start:pyscript`:startUp;
 .scrape.getData:pyscript`:enterDestAndScrape;
 
-runProgram:{[hotelInfo]
+scrapeData:{[url;driver;dest;chkin;chkout]
+	data:.scrape.getData[url;driver;dest;chkin;chkout]`;
+	:([] t:.z.p; destination:`$dest; hotel:`$data[0]; checkin:"D"$chkin; checkout:"D"$chkout; price:"J"$data[1])
+	};
+
+runProgram:{[]
 	//Initialise some variables
 	url:"https://samplesite.com";
 	dest:("Rome, Italy"; "London, United Kingdom";  "Dublin, Ireland"; "New York, United States"; "Newry, United Kingdom");
@@ -31,11 +36,6 @@ runProgram:{[hotelInfo]
 	chkout:"25/01/2019";
 
 	driver:.scrape.start[]`;
-
-	scrapeData:{[url;driver;dest;chkin;chkout]
-		data:.scrape.getData[url;driver;dest;chkin;chkout]`;
-		:([] t:.z.p; destination:`$dest; hotel:`$data[0]; checkin:"D"$chkin; checkout:"D"$chkout; price:"J"$data[1])
-		};
 
 	data:raze scrapeData[url;driver;;chkin;chkout] each dest;
 
