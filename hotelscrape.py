@@ -4,7 +4,8 @@ import time
 
 def startUp():
 # Using chrome automation requires chromedriver to be installed. http://chromedriver.chromium.org
-    driver = webdriver.Chrome('/Users/abinsaju/chromedriver')
+    path_to_chromedriver = ''
+    driver = webdriver.Chrome(path_to_chromedriver)
 
     return driver 
 
